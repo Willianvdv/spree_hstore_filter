@@ -3,11 +3,10 @@ Spree::ProductProperty.class_eval do
 
   private
   def update_data_hstore
-    data = {}
-    product.properties.each do |property|
-      data[property.name.to_sym] = product.property(property.name)
-    end
-    product.data = data
+    # todo: This method is called every time a productproperty is saved. 
+    #       Refactor this so this method is called once per product save (when a product has multiple properties)
+    
+    product.data = Hash[(product.properties.map { |p| [p.name.to_sym, product.property(p.name)] })]
     product.save!
   end
 end
