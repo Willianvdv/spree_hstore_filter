@@ -1,3 +1,6 @@
+require 'coveralls'
+Coveralls.wear!
+
 # Run Coverage report
 require 'simplecov'
 SimpleCov.start do
