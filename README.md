@@ -1,6 +1,8 @@
 SpreeHstore
 ===========
 
+[![Build Status](https://travis-ci.org/Willianvdv/spree_hstore.png?branch=master)](https://travis-ci.org/Willianvdv/spree_hstore) [![Coverage Status](https://coveralls.io/repos/Willianvdv/spree_hstore/badge.png?branch=master)](https://coveralls.io/r/Willianvdv/spree_hstore?branch=master)
+
 Introduction goes here.
 
 Installation
