@@ -1,8 +1,13 @@
 source 'https://rubygems.org'
 
 # Provides basic authentication functionality for testing parts of your engine
-gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-1-stable'
+gem 'pg'
+gem 'activerecord-postgres-hstore'
 gem 'money', '~> 5.1.1'
 gem 'coveralls', require: false
+
+group :test do
+  gem 'spree', github: 'Willianvdv/spree' 
+end
 
 gemspec
