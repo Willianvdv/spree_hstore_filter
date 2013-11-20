@@ -7,7 +7,7 @@ gem 'money', '~> 5.1.1'
 gem 'coveralls', require: false
 
 group :test do
-  gem 'spree', github: 'Willianvdv/spree' 
+  gem 'spree', github: 'Willianvdv/spree', branch: 'postgres_host_in_test_app' 
 end
 
 gemspec
