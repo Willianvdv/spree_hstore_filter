@@ -81,5 +81,11 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
+  config.include FactoryGirl::Syntax::Methods
+
+  config.include Spree::TestingSupport::Preferences
+  config.include Spree::TestingSupport::UrlHelpers
+  config.include Spree::TestingSupport::ControllerRequests
+  
   config.fail_fast = ENV['FAIL_FAST'] || false
 end
