@@ -1,2 +1,1 @@
-Spree::Product.class_eval do
-end
+Spree::Product.class_eval do; end
