@@ -1,6 +1,5 @@
 Spree::ProductsController.class_eval do
-  
-  def index_with_filter
+    def index_with_filter
     index_without_filter
     filter_on = filterables.select { |key| params.has_key? key }
     filter_on.each do |filterable|
