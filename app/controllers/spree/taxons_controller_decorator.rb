@@ -1,7 +1,4 @@
 Spree::TaxonsController.class_eval do
-  alias_method :show_without_filter, :show
-  alias_method :show, :show_with_filter
-  
   def show_with_filter
     show_without_filter
 
@@ -12,6 +9,9 @@ Spree::TaxonsController.class_eval do
     end
     @filterables_with_values = filterables_with_values
   end
+
+  alias_method :show_without_filter, :show
+  alias_method :show, :show_with_filter
 
   private
   def filterables
