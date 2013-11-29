@@ -1,8 +1,8 @@
 Spree::TaxonsController.class_eval do
+  alias_method :show_without_filter, :show
+  alias_method :show, :show_with_filter
+  
   def show_with_filter
-    # todo:
-    #  - This is almost a duplicate of the product_controller_decorator filter
-
     show_without_filter
 
     filter_on = filterables.select { |filterable| params.has_key? filterable.name }
@@ -12,9 +12,6 @@ Spree::TaxonsController.class_eval do
     end
     @filterables_with_values = filterables_with_values
   end
-
-  alias_method :show_without_filter, :show
-  alias_method :show, :show_with_filter
 
   private
   def filterables
