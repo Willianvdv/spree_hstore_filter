@@ -36,8 +36,13 @@ describe Spree::ProductsController do
 
   describe '.index' do
     describe 'filter' do
+      it 'should not filter if no filters are given' do
+        spree_get :index
+        expect(assigns[:products]).to eq([product_with_the_red_cap, product_with_the_blue_cap])
+      end
+      
       it 'should filter on the data params' do
-        spree_get :index, baseball_cap_color: 'blue'
+        spree_get :index, baseball_cap_color: ['blue', 'yellow']
         expect(assigns[:products]).to eq([product_with_the_blue_cap])
       end
 

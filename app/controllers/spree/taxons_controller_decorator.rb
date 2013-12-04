@@ -4,8 +4,15 @@ Spree::TaxonsController.class_eval do
 
     filter_on = filterables.select { |filterable| params.has_key? filterable.name }
     filter_on.each do |filterable|
-      # todo: use here the faster Person.where("data @> 'foo=>bar'") syntax
-      @products = @products.where("data -> ? = ?", filterable.name, params[filterable.name])
+      if params[filterable.name]
+        filter = params[filterable.name].map do |value| 
+          value = ActiveRecord::Base::sanitize(value)
+          "data -> '#{filterable.name}' = #{value}"
+        end
+
+        filter = filter.join(' OR ')
+        @products = @products.where("#{filter}")
+      end
     end
     @filterables_with_values = filterables_with_values
   end
