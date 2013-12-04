@@ -16,6 +16,13 @@ Add spree_hstore to your Gemfile:
 gem 'spree_hstore', github: 'Willianvdv/spree_hstore_filter'
 ```
 
+Install the migrations and migrate
+
+```
+$ bundle exec rake railties:install:migrations FROM=spree_hstore
+$ bundle exec rake db:migrate
+```
+
 Testing
 -------
 
