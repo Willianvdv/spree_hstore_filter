@@ -27,11 +27,5 @@ describe Spree::Taxon do
         expect(taxon.properties).to eq([property])
       end
     end
-
-    describe '.filterables' do
-      it 'returns the properties defined as filterable' do
-        expect(taxon.filterables).to eq([property])
-      end
-    end
   end
 end

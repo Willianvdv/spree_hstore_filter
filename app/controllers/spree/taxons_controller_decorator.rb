@@ -15,7 +15,7 @@ Spree::TaxonsController.class_eval do
 
   private
   def filterables
-    @taxon.filterables
+    @taxon.properties
   end
 
   def filterables_with_values
