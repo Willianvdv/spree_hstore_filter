@@ -1,0 +1,1 @@
+Spree::PermittedAttributes.taxon_attributes << :property_ids
