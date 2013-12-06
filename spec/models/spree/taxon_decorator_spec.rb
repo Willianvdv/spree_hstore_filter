@@ -4,17 +4,32 @@ describe Spree::Taxon do
   let(:taxon) { FactoryGirl.create :taxon }
   let(:property) { FactoryGirl.create :property }
 
-  before :each do
-    @taxon_filter = Spree::TaxonFilter.create!(taxon: taxon, property: property)
+  describe 'no taxon filters are defined' do
+    it 'creates taxon filters' do
+      taxon.property_ids = [property.id,]
+      expect(taxon.properties).to eq([property])
+    end
   end
 
-  it 'has taxon filters' do
-    expect(taxon.taxon_filters).to eq([@taxon_filter])
-  end
+  describe 'has taxon filters defined' do
+    before :each do
+      @taxon_filter = Spree::TaxonFilter.create!(taxon: taxon, property: property)
+    end
 
-  describe '.filterables' do
-    it 'returns the properties defined as filterable' do
-      expect(taxon.filterables).to eq([property])
+    it 'has taxon filters' do
+      expect(taxon.taxon_filters).to eq([@taxon_filter])
+    end
+
+    describe '#properties' do
+      it 'returns the properties' do
+        expect(taxon.properties).to eq([property])
+      end
+    end
+
+    describe '.filterables' do
+      it 'returns the properties defined as filterable' do
+        expect(taxon.filterables).to eq([property])
+      end
     end
   end
 end
