@@ -1,0 +1,6 @@
+<div class="twelve columns alpha omega">
+  <%= @taxon.taxon_filter_ids %>
+  <%= f.field_container :taxon_filters do %>
+    <%= f.text_field :taxon_filter_ids, value: @taxon.taxon_filter_ids.join(',') %>
+  <% end %>
+</div>
