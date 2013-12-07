@@ -35,6 +35,11 @@ describe Spree::TaxonsController do
   end
   
   describe '.show' do
+    it 'should filter on the data params' do
+      spree_get :show, :id => taxon.permalink, baseball_cap_color: ['blue', 'yellow']
+      expect(assigns[:products]).to eq([product_with_the_blue_cap])
+    end
+    
     it 'assigns the filterable_properties' do
       spree_get :show, :id => taxon.permalink
       expect(assigns[:filterables_with_values]).to eq([[filterable_property, ['blue']]])
