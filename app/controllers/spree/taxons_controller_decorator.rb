@@ -27,9 +27,10 @@ Spree::TaxonsController.class_eval do
   def product_values_for_product property
     @products.joins(:product_properties)
               .where('spree_product_properties.property_id = ?', property.id)
+              .select('spree_product_properties.value')
               .distinct('spree_product_properties.value')
               .limit(nil)
-              .select('spree_product_properties.value')
+              .reorder(nil)
               .pluck('spree_product_properties.value')
   end
 end
