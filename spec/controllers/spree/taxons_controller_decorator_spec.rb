@@ -8,17 +8,9 @@ describe Spree::TaxonsController do
     product_property
   }
 
-  let!(:product_with_the_blue_cap) { 
-    product_property_with_the_blue_cap.product
-  }
+  let!(:filterable_property) { product_property_with_the_blue_cap.property }
 
-  let!(:filterable_property) {
-    property = product_property_with_the_blue_cap.property
-    property.filterable = true
-    property.save!
-    property
-  }
-
+  let!(:product_with_the_blue_cap) { product_property_with_the_blue_cap.product }
   let!(:product_with_the_red_cap) { 
     product_property = FactoryGirl.create :product_property 
     product_property.value = 'red'
