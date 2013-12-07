@@ -1,0 +1,18 @@
+<% @filterables_with_values.each do |property, values| %>
+  <div class="submenu navigation taxonfilter" data-hook="navigation">
+    <h4 class="filter-title"> <%= property.presentation %> </h4>
+    <ul class="checkboxes">
+      <% values.each do |value| %>
+        <li>
+          <label class="checkbox-label" for="<%= value.parameterize %>">
+            <input type="checkbox"
+                   id="<%= value.parameterize %>"
+                   name="<%= property.name %>[]"
+                   value="<%= value %>"
+                   <%= ' checked' if params[property.name].try(:include?, value) %>/>
+            <span><%= value %></span> 
+        </li>
+      <% end %>
+    </ul>      
+  </div>
+<% end %>
