@@ -1,0 +1,46 @@
+var property_search_url = "/api/properties.json";
+
+$(document).ready(function () {
+  'use strict';
+
+  if ($('#taxon_property_ids').length > 0) {
+    $('#taxon_property_ids').select2({
+      placeholder: Spree.translations.taxon_placeholder,
+      multiple: true,
+      initSelection: function (element, callback) {
+        var url = Spree.url(property_search_url, {
+          ids: element.val()
+        });
+        return $.getJSON(url, null, function (data) {
+          return callback(data['properties']);
+        });
+      },
+      ajax: {
+        url: property_search_url,
+        datatype: 'json',
+        data: function (term, page) {
+          return {
+            per_page: 50,
+            page: page,
+            q: {
+              name_cont: term
+            }
+          };
+        },
+        results: function (data, page) {
+          var more = page < data.pages;
+          return {
+            results: data['properties'],
+            more: more
+          };
+        }
+      },
+      formatResult: function (property) {
+        return property.name;
+      },
+      formatSelection: function (property) {
+        return property.name;
+      }
+    });
+  }
+});
