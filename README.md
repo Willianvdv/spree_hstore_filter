@@ -39,3 +39,15 @@ bundle
 DB=postgres DB_HOST=localhost bundle exec rake test_app
 bundle exec rspec spec
 ```
+
+Screens
+-------
+
+Edit taxon:
+
+![image](misc/screens/edit_taxon.png)
+
+Filter on taxon page:
+
+![image](misc/screens/filter_in_taxon.png)
+
