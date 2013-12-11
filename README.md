@@ -17,7 +17,7 @@ gem 'spree_hstore', github: 'Willianvdv/spree_hstore_filter'
 Install the migrations and migrate
 
 ```
-$ bundle exec rake railties:install:migrations FROM=spree_hstore
+$ bundle exec rails g spree_hstore:install
 $ bundle exec rake db:migrate
 ```
 
