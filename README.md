@@ -51,3 +51,5 @@ Filter on taxon page:
 
 ![image](misc/screens/filter_in_taxon.png)
 
+Copyright (c) 2013 Willian van der Velde, released under the New BSD License
+
