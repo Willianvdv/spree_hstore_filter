@@ -86,25 +86,8 @@ Spree::TaxonsController.class_eval do
   end
 
   def filters
-    #@taxon.properties.map do |property|
-    Spree::Property.limit(5).map do |property|
+    @taxon.properties.map do |property|
       ::HStoreFilter::Filter.new property, @products
     end
   end
-
-  # def filterables_with_values
-  #   filterables.collect { |property|
-  #     [property, product_values_for_product(property)]
-  #   }
-  # end
-
-  # def product_values_for_product property
-  #   @products.joins(:product_properties)
-  #             .where('spree_product_properties.property_id = ?', property.id)
-  #             .select('spree_product_properties.value')
-  #             .distinct('spree_product_properties.value')
-  #             .limit(nil)
-  #             .reorder(nil)
-  #             .pluck('spree_product_properties.value')
-  # end
 end
