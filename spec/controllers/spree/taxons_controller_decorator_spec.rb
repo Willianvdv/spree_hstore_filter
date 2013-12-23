@@ -72,7 +72,7 @@ describe Spree::TaxonsController do
   end
   
   describe '.show' do
-    it 'should filter on the data params' do
+    it 'filters on the data params' do
       spree_get :show, :id => taxon.permalink, baseball_cap_color: ['blue', 'yellow']
       expect(assigns[:products]).to eq([product_with_the_blue_cap])
     end
@@ -84,7 +84,7 @@ describe Spree::TaxonsController do
         Spree::TaxonFilter.create taxon: taxon, property: size_property
       end
 
-      it 'should not return product if the second filter doesnt allow results' do
+      it 'not returns products that dont match second filter' do
         spree_get :show, 
                   id: taxon.permalink, 
                   baseball_cap_color: ['blue',],
