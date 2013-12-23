@@ -7,9 +7,7 @@ shared_context "filterable properties" do
     product_property.save!
     product_property
   }
-
   let!(:filterable_property) { product_property_with_the_blue_cap.property }
-
   let!(:product_with_the_blue_cap) { product_property_with_the_blue_cap.product }
   let!(:product_with_the_red_cap) { 
     product_property = FactoryGirl.create :product_property 
@@ -17,10 +15,11 @@ shared_context "filterable properties" do
     product_property.save!
     product_property.product
   }
-
   let!(:taxon) { FactoryGirl.create :taxon }
-  let!(:taxonfilter) { Spree::TaxonFilter.create(taxon: taxon, 
-                                                 property: filterable_property)}
+  
+  before :each do
+    Spree::TaxonFilter.create taxon: taxon, property: filterable_property
+  end
 end
 
 describe HStoreFilter::Filter do
@@ -77,6 +76,39 @@ describe Spree::TaxonsController do
       spree_get :show, :id => taxon.permalink, baseball_cap_color: ['blue', 'yellow']
       expect(assigns[:products]).to eq([product_with_the_blue_cap])
     end
+
+    context 'multiple filters' do
+      let!(:size_property) { FactoryGirl.create :property, name: 'size', presentation: 'size' }
+
+      before :each do
+        Spree::TaxonFilter.create taxon: taxon, property: size_property
+      end
+
+      it 'should not return product if the second filter doesnt allow results' do
+        spree_get :show, 
+                  id: taxon.permalink, 
+                  baseball_cap_color: ['blue',],
+                  size: ['M',]
+        expect(assigns[:products]).to eq([])  
+      end
+    end
+
+    # context 'multiple filters' do
+    #   let!(:size_product_property) {
+    #     product_property = FactoryGirl.create :product_property, 
+    #                                           product: product_with_the_red_cap, 
+    #                                           property: size_property
+    #     product_property.value = 'M'
+    #     product_property.save!
+    #     product_property
+    #   }
+
+    #   before :each do
+    #     taxon.products.push size_product_property
+    #     taxon.save!
+    #   end
+    #end
+
     
     it 'assigns the filters' do
       spree_get :show, :id => taxon.permalink

@@ -52,15 +52,16 @@ module HStoreFilter
     def filter
       filters = []
       @filterables.each do |filterable|
+        filters_per_filterable = []
         property = filterable.property
         @params[property.name].each do |value|
           value = ActiveRecord::Base::sanitize(value)
-          filters << "data -> '#{property.name}' = #{value}"
+          filters_per_filterable << "data -> '#{property.name}' = #{value}"
         end
+        filters << filters_per_filterable.join(' OR ')
       end
-
-      filter = filters.join(' OR ')
-      @product_collection.where("#{filter}")
+      filter = filters.join(') AND (')
+      @product_collection.where("(#{filter})")
     end
   end
 end
