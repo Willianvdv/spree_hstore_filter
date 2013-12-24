@@ -76,6 +76,13 @@ describe Spree::TaxonsController do
       spree_get :show, :id => taxon.permalink, baseball_cap_color: ['blue', 'yellow']
       expect(assigns[:products]).to eq([product_with_the_blue_cap])
     end
+    
+    context 'no filters are given' do
+      it 'returns all the products' do
+        spree_get :show, :id => taxon.permalink
+        expect(assigns[:products]).to eq([product_with_the_blue_cap, product_with_the_red_cap])
+      end
+    end
 
     context 'multiple filters' do
       let!(:size_property) { FactoryGirl.create :property, name: 'size', presentation: 'size' }

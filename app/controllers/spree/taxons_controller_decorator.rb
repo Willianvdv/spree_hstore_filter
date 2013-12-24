@@ -58,10 +58,17 @@ module HStoreFilter
           value = ActiveRecord::Base::sanitize(value)
           filters_per_filterable << "data -> '#{property.name}' = #{value}"
         end
-        filters << filters_per_filterable.join(' OR ')
+
+        filters << filters_per_filterable.join(' OR ') 
       end
-      filter = filters.join(') AND (')
-      @product_collection.where("(#{filter})")
+
+      if not filters.empty?
+        filter = filters.join(') AND (')
+        product_collection = @product_collection.where("(#{filter})")
+      else
+        product_collection = @product_collection
+      end
+      product_collection
     end
   end
 end
