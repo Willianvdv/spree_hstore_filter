@@ -61,14 +61,9 @@ module HStoreFilter
 
         filters << filters_per_filterable.join(' OR ') 
       end
-
-      if not filters.empty?
-        filter = filters.join(') AND (')
-        product_collection = @product_collection.where("(#{filter})")
-      else
-        product_collection = @product_collection
-      end
-      product_collection
+      
+      filter = filters.join(') AND (')
+      filters.empty? ? @product_collection : @product_collection.where("(#{filter})")
     end
   end
 end
