@@ -12,7 +12,10 @@
                      name="<%= filter_option.property.name %>[]"
                      value="<%= filter_option.value %>"
                      <%= ' checked' if params[filter_option.property.name].try(:include?, filter_option.value) %>/>
-              <span><%= filter_option.value %> (<%= filter_option.number_of_products %>)</span> 
+              <span>
+                <%= filter_option.value %> 
+                <span class="amount">(<%= filter_option.number_of_products %>)</span>
+              </span> 
           </li>
         <% end %>
       </ul>     
