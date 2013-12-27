@@ -80,7 +80,7 @@ describe Spree::TaxonsController do
     context 'no filters are given' do
       it 'returns all the products' do
         spree_get :show, :id => taxon.permalink
-        expect(assigns[:products]).to eq([product_with_the_blue_cap, product_with_the_red_cap])
+        expect(assigns[:products]).to match_array([product_with_the_blue_cap, product_with_the_red_cap])
       end
     end
 
