@@ -5,7 +5,6 @@ describe Spree::Taxon do
   let(:property) { FactoryGirl.create :property }
   let(:property2) { FactoryGirl.create :property }
 
-
   describe 'no taxon filters are defined' do
     it 'creates taxon filters' do
       taxon.property_ids = [property.id, property2.id]

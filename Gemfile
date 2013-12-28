@@ -11,4 +11,6 @@ group :test do
   gem 'spree', github: 'spree/spree', branch: '2-1-stable' 
 end
 
+gem 'guard-rspec', require: false
+
 gemspec

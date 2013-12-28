@@ -8,10 +8,6 @@ describe Spree::Product do
       product.save!
       product
     }
-
-    before :each do
-
-    end
     
     it "should be presistent" do
       product.reload
