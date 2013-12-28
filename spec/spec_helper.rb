@@ -94,15 +94,16 @@ end
 
 
 shared_context "filterable properties" do
+  let!(:filterable_property) { FactoryGirl.create :property }
   let!(:product_property_with_the_blue_cap) { 
-    product_property = FactoryGirl.create :product_property 
+    product_property = FactoryGirl.create :product_property, property: filterable_property
     product_property.value = 'blue'
     product_property.save!
     product_property
   }
 
   let!(:product_property_with_the_red_cap) { 
-    product_property = FactoryGirl.create :product_property 
+    product_property = FactoryGirl.create :product_property, property: filterable_property
     product_property.value = 'red'
     product_property.save!
     product_property
@@ -111,7 +112,6 @@ shared_context "filterable properties" do
   let!(:product_with_the_blue_cap) { product_property_with_the_blue_cap.product }
   let!(:product_with_the_red_cap) { product_property_with_the_red_cap.product }
   let!(:taxon) { FactoryGirl.create :taxon }
-  let!(:filterable_property) { product_property_with_the_blue_cap.property }
   
   before :each do
     Spree::TaxonFilter.create taxon: taxon, property: filterable_property

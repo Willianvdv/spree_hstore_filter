@@ -1,6 +1,5 @@
 <%= form_tag '', :method => :get, :id => 'sidebar_products_search' do %>
   <% @filters.each do |filter| %>
-
     <div class="submenu navigation taxonfilter" data-hook="navigation">
       <h4 class="filter-title"> <%= filter.property.presentation %> </h4>
       <ul class="checkboxes">

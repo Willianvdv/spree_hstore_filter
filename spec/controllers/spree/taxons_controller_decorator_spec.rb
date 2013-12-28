@@ -7,16 +7,13 @@ describe HStoreFilter::Filter do
 
   describe '.values' do
     it 'returns the values of the property in the products scope' do
-      expect(subject.values).to eq(['blue'])
+      expect(subject.values).to eq(['red', 'blue'])
     end
   end
 
   describe '.options' do
     it 'creates a filter option for each value' do
-      HStoreFilter::FilterOption.should_receive(:new).with('blue', 
-                                                      filterable_property, 
-                                                      Spree::Product)
-      expect(subject.options.length).to eq(1)
+      expect(subject.options.length).to eq(2)
     end
   end
 end
