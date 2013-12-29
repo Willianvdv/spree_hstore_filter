@@ -40,6 +40,12 @@ DB=postgres DB_HOST=localhost bundle exec rake test_app
 bundle exec rspec spec
 ```
 
+Bonus
+-----
+
+You can easily filter on (multiple!) product properties by doing `Spree::Products.where("data @> 'foo=>bar'")`. See https://github.com/diogob/activerecord-postgres-hstore for full documentation about filtering on the data field
+
+
 Screens
 -------
 
