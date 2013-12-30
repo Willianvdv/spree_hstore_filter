@@ -13,7 +13,7 @@
                      <%= ' checked' if params[filter_option.property.name].try(:include?, filter_option.value) %>/>
               <span>
                 <%= filter_option.value %> 
-                <span class="amount">(<%= filter_option.number_of_products %>)</span>
+                <span class="amount"> (<%= filter_option.number_of_products %>)</span>
               </span> 
           </li>
         <% end %>
