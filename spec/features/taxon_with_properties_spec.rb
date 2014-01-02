@@ -33,8 +33,7 @@ describe 'filter a taxon by product properties' do
   end 
 
   context 'product are paginated' do
-    it 'should ignore pagination' do
-      products_per_page = Spree::Config.products_per_page
+    it 'filters should ignore pagination' do
       Spree::Config.products_per_page = 1
       visit "/t/#{taxon.permalink}" 
 
@@ -44,7 +43,23 @@ describe 'filter a taxon by product properties' do
       within('.checkbox-label[for="red"]') do
         page.should have_content("(1)")
       end
-      Spree::Config.products_per_page = products_per_page
+      Spree::Config.products_per_page = 25
+    end
+
+    # Regression test for issue 5
+    context 'on the second page' do
+      it 'filters should ignore pagination' do
+        Spree::Config.products_per_page = 1
+        visit "/t/#{taxon.permalink}?page=2" 
+
+        within('.checkbox-label[for="blue"]') do
+          page.should have_content("(1)")
+        end
+        within('.checkbox-label[for="red"]') do
+          page.should have_content("(1)")
+        end
+        Spree::Config.products_per_page = 25
+      end
     end
   end
 end
