@@ -76,6 +76,8 @@ RSpec.configure do |config|
   config.before :each do
     DatabaseCleaner.strategy = example.metadata[:js] ? :truncation : :transaction
     DatabaseCleaner.start
+    Spree::Config.products_per_page = 25
+
   end
 
   # After each spec clean the database.
@@ -90,27 +92,27 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::ControllerRequests
   
   config.fail_fast = ENV['FAIL_FAST'] || false
+ 
 end
 
 
 shared_context "filterable properties" do
   let!(:filterable_property) { FactoryGirl.create :property }
-  let!(:product_property_with_the_blue_cap) { 
-    product_property = FactoryGirl.create :product_property, property: filterable_property
-    product_property.value = 'blue'
-    product_property.save!
-    product_property
+
+  let!(:product_with_the_blue_cap) { 
+    product = FactoryGirl.create :product
+    product.product_properties_attributes = [{:property_name=> filterable_property.name, :value=>"blue"}]
+    product.save!
+    product
   }
 
-  let!(:product_property_with_the_red_cap) { 
-    product_property = FactoryGirl.create :product_property, property: filterable_property
-    product_property.value = 'red'
-    product_property.save!
-    product_property
+  let!(:product_with_the_red_cap) { 
+    product = FactoryGirl.create :product
+    product.product_properties_attributes = [{:property_name=> filterable_property.name, :value=>"red"}]
+    product.save!
+    product
   }
 
-  let!(:product_with_the_blue_cap) { product_property_with_the_blue_cap.product }
-  let!(:product_with_the_red_cap) { product_property_with_the_red_cap.product }
   let!(:taxon) { FactoryGirl.create :taxon }
   
   before :each do

@@ -58,7 +58,6 @@ describe 'filter a taxon by product properties' do
         within('.checkbox-label[for="red"]') do
           page.should have_content("(1)")
         end
-        Spree::Config.products_per_page = 25
       end
     end
   end
