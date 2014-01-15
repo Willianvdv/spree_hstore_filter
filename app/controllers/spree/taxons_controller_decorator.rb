@@ -38,7 +38,7 @@ module HStoreFilter
       # todo: there must be a beter way to do this
       value = ActiveRecord::Base::sanitize(@value)
       filter = "data -> '#{@property.name}' = #{value}"
-      @number_of_products ||= @product_collection.where(filter).count
+      @number_of_products ||= @product_collection.limit(nil).where(filter).count
     end
   end
 
