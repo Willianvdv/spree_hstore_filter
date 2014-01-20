@@ -4,13 +4,9 @@ source 'https://rubygems.org'
 gem 'pg'
 gem 'activerecord-postgres-hstore'
 gem 'money', '~> 5.1.1'
-gem 'coveralls', require: false
 gem 'acts_as_list'
-
-group :test do
-  gem 'spree', github: 'spree/spree', branch: '2-1-stable' 
-end
-
+gem 'coveralls', require: false
 gem 'guard-rspec', require: false
+gem 'spree', github: 'spree/spree', branch: '2-1-stable' 
 
 gemspec
