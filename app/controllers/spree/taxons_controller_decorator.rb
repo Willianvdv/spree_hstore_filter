@@ -35,10 +35,12 @@ module HStoreFilter
     end
 
     def number_of_products
-      # todo: there must be a beter way to do this
-      value = ActiveRecord::Base::sanitize(@value)
-      filter = "data -> '#{@property.name}' = #{value}"
-      @number_of_products ||= @product_collection.limit(nil).where(filter).count
+      hstore_filter = ActiveRecord::Base::sanitize "#{@property.name}=>\"#{@value}\""
+      filter = "data @> #{hstore_filter}::hstore"
+      @number_of_products ||= @product_collection
+                                  .limit(nil)
+                                  .where(filter)
+                                  .count
     end
   end
 
@@ -55,8 +57,8 @@ module HStoreFilter
         filters_per_filterable = []
         property = filterable.property
         @params[property.name].each do |value|
-          value = ActiveRecord::Base::sanitize(value)
-          filters_per_filterable << "data -> '#{property.name}' = #{value}"
+          hstore_filter = ActiveRecord::Base::sanitize "#{property.name}=>\"#{value}\""
+          filters_per_filterable << "data @> #{hstore_filter}::hstore"
         end
 
         filters << filters_per_filterable.join(' OR ') 
