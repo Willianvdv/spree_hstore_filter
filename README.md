@@ -21,10 +21,10 @@ $ bundle exec rails g spree_hstore:install
 $ bundle exec rake db:migrate
 ```
 
+Make sure you have installed the latest migrations!
+
 Testing
 -------
-
-Be sure to bundle your dependencies and then create a dummy test app for the specs to run against.
 
 ```
 bundle
