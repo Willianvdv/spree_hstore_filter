@@ -5,7 +5,7 @@ Spree::Admin::TaxonsController.class_eval do
     # todo: rework this. Don't permit all params
     def taxon_params
       params.require(:taxon).permit!
-    end 
+    end
 
     def split_taxon_ids
      if params[:taxon][:property_ids].present?

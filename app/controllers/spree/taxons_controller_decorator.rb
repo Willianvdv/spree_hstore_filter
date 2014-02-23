@@ -12,7 +12,7 @@ Spree::TaxonsController.class_eval do
 
   private
   def filter_on
-    filters.select do |filterable| 
+    filters.select do |filterable|
       property = filterable.property
       params.has_key?(property.name) and params[property.name].present?
     end
