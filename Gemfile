@@ -7,6 +7,6 @@ gem 'money', '~> 5.1.1'
 gem 'acts_as_list'
 gem 'coveralls', require: false
 gem 'guard-rspec', require: false
-gem 'spree', github: 'spree/spree', branch: '2-1-stable' 
+gem 'spree', github: 'spree/spree', branch: '2-2-stable'
 
 gemspec
