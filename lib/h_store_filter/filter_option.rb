@@ -9,7 +9,7 @@ module HStoreFilter
     end
 
     def number_of_products
-      hstore_filter = ActiveRecord::Base.sanitize "#{@property.name}=>\"#{@value}\""
+      hstore_filter = ActiveRecord::Base.sanitize "\"#{@property.name}\"=>\"#{@value}\""
       filter = "data @> #{hstore_filter}::hstore"
       @number_of_products ||= @product_collection.limit(nil)
                                                  .where(filter)
