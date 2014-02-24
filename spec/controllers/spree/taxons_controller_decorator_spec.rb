@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe HStoreFilter::Filter do
-  include_context "filterable properties"
+  include_context 'filterable properties'
 
   subject { HStoreFilter::Filter.new filterable_property, Spree::Product }
 
   describe '.values' do
     it 'returns the values of the property in the products scope' do
-      expect(subject.values).to eq(['red', 'blue'])
+      expect(subject.values).to eq(%w(red blue))
     end
   end
 
@@ -19,7 +19,7 @@ describe HStoreFilter::Filter do
 end
 
 describe HStoreFilter::FilterOption do
-  include_context "filterable properties"
+  include_context 'filterable properties'
 
   subject { HStoreFilter::FilterOption.new 'blue', filterable_property, Spree::Product }
 
@@ -39,22 +39,22 @@ describe HStoreFilter::FilterOption do
 end
 
 describe Spree::TaxonsController do
-  include_context "filterable properties"
+  include_context 'filterable properties'
 
   before :each do
     taxon.products.push product_with_the_blue_cap, product_with_the_red_cap
     taxon.save!
   end
-  
+
   describe '.show' do
     it 'filters on the data params' do
-      spree_get :show, :id => taxon.permalink, baseball_cap_color: ['blue', 'yellow']
+      spree_get :show, id: taxon.permalink, baseball_cap_color: %w(blue yellow)
       expect(assigns[:products]).to eq([product_with_the_blue_cap])
     end
-    
+
     context 'no filters are given' do
       it 'returns all the products' do
-        spree_get :show, :id => taxon.permalink
+        spree_get :show, id: taxon.permalink
         expect(assigns[:products]).to match_array([product_with_the_blue_cap, product_with_the_red_cap])
       end
     end
@@ -67,16 +67,16 @@ describe Spree::TaxonsController do
       end
 
       it 'not returns products that dont match second filter' do
-        spree_get :show, 
-                  id: taxon.permalink, 
-                  baseball_cap_color: ['blue',],
-                  size: ['M',]
-        expect(assigns[:products]).to eq([])  
+        spree_get :show,
+                  id: taxon.permalink,
+                  baseball_cap_color: ['blue'],
+                  size: ['M']
+        expect(assigns[:products]).to eq([])
       end
     end
-    
+
     it 'assigns the filters' do
-      spree_get :show, :id => taxon.permalink
+      spree_get :show, id: taxon.permalink
       expect(assigns[:filters])# .to eq([[filterable_property, ['blue']]])
     end
   end

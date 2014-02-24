@@ -14,7 +14,9 @@ describe Spree::Taxon do
 
   describe 'has taxon filters defined' do
     before :each do
-      @taxon_filter = Spree::TaxonFilter.create!(taxon: taxon, property: property)
+      @taxon_filter = Spree::TaxonFilter.create!(
+        taxon: taxon,
+        property: property)
     end
 
     it 'has taxon filters' do

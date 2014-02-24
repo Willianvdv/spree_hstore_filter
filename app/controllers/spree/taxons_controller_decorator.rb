@@ -11,10 +11,11 @@ Spree::TaxonsController.class_eval do
   alias_method :show, :show_with_filter
 
   private
+
   def filter_on
     filters.select do |filterable|
       property = filterable.property
-      params.has_key?(property.name) and params[property.name].present?
+      params.key?(property.name) && params[property.name].present?
     end
   end
 

@@ -5,6 +5,6 @@ module Spree
     belongs_to :taxon
     belongs_to :property
 
-    validates_uniqueness_of :taxon_id, :scope => :property_id, :message => :already_linked
+    validates_uniqueness_of :taxon_id, scope: :property_id, message: :already_linked
   end
 end

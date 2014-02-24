@@ -34,7 +34,6 @@ require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/url_helpers'
 require 'spree/testing_support/capybara_ext'
 
-
 # Requires factories defined in lib/spree_hstore/factories.rb
 require 'spree_hstore/factories'
 
@@ -91,31 +90,34 @@ RSpec.configure do |config|
   config.include Spree::TestingSupport::Preferences
   config.include Spree::TestingSupport::UrlHelpers
   config.include Spree::TestingSupport::ControllerRequests
-  
+
   config.fail_fast = ENV['FAIL_FAST'] || false
- 
+
 end
 
-
-shared_context "filterable properties" do
+shared_context 'filterable properties' do
   let!(:filterable_property) { FactoryGirl.create :property }
 
-  let!(:product_with_the_blue_cap) { 
+  let!(:product_with_the_blue_cap) do
     product = FactoryGirl.create :product
-    product.product_properties_attributes = [{:property_name=> filterable_property.name, :value=>"blue"}]
+    product.product_properties_attributes = [{
+      property_name: filterable_property.name,
+      value: 'blue' }]
     product.save!
     product
-  }
+  end
 
-  let!(:product_with_the_red_cap) { 
+  let!(:product_with_the_red_cap) do
     product = FactoryGirl.create :product
-    product.product_properties_attributes = [{:property_name=> filterable_property.name, :value=>"red"}]
+    product.product_properties_attributes = [{
+      property_name: filterable_property.name,
+      value: 'red' }]
     product.save!
     product
-  }
+  end
 
   let!(:taxon) { FactoryGirl.create :taxon }
-  
+
   before :each do
     Spree::TaxonFilter.create taxon: taxon, property: filterable_property
   end

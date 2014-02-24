@@ -1,6 +1,6 @@
 module HStoreFilter
   class FilterScope
-    def initialize params, filterables, product_collection
+    def initialize(params, filterables, product_collection)
       @params = params
       @filterables = filterables
       @product_collection = product_collection
@@ -12,13 +12,13 @@ module HStoreFilter
         filters_per_filterable = []
         property = filterable.property
         @params[property.name].each do |value|
-          hstore_filter = ActiveRecord::Base::sanitize "#{property.name}=>\"#{value}\""
+          hstore_filter = ActiveRecord::Base.sanitize "#{property.name}=>\"#{value}\""
           filters_per_filterable << "data @> #{hstore_filter}::hstore"
         end
 
-        filters << filters_per_filterable.join(' OR ') 
+        filters << filters_per_filterable.join(' OR ')
       end
-      
+
       filter = filters.join(') AND (')
       filters.empty? ? @product_collection : @product_collection.where("(#{filter})")
     end

@@ -2,7 +2,7 @@ module HStoreFilter
   class Filter
     attr_accessor :property
 
-    def initialize property, product_collection
+    def initialize(property, product_collection)
       @property = property
       @product_collection = product_collection
     end
@@ -12,7 +12,7 @@ module HStoreFilter
         FilterOption.new value, @property, @product_collection
       end
     end
-    
+
     def values
       @values ||= @product_collection
         .joins(:product_properties)
