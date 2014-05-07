@@ -11,7 +11,11 @@ module HStoreFilter
       @filterables.each do |filterable|
         filters_per_filterable = []
         property = filterable.property
-        @params[property.name].each do |value|
+
+        values = @params[property.name]
+        values = [values] unless values.is_a? Array
+
+        values.each do |value|
           hstore_filter = ActiveRecord::Base.sanitize "\"#{property.name}\"=>\"#{value}\""
           filters_per_filterable << "data @> #{hstore_filter}::hstore"
         end
